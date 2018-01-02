@@ -16,7 +16,6 @@ if ! gcc in [ feature.values <toolset> ]
 
 using stlport : : /home/richard/lively/external/stlport/stlport ;
 
-
 project : default-build <toolset>gcc ;
 
 # List of --with-<library> and --without-<library>

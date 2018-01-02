@@ -26,6 +26,7 @@
 
 // #include <boost/thread/thread.hpp>
 #include <boost/lockfree/queue.hpp>
+#include <boost/lockfree/spsc_queue.hpp>
 #include <boost/atomic.hpp>
 #include <errno.h>
 #include <stdio.h>
@@ -35,18 +36,19 @@
 boost::atomic_int producer_count(0);
 boost::atomic_int consumer_count(0);
 
-boost::lockfree::queue<int> queue(128);
+// boost::lockfree::queue<int> queue(128);
+boost::lockfree::spsc_queue<int, boost::lockfree::capacity<1024> > queue;
 
 const int iterations = 1000000;
 const int producer_thread_count = 10;
 const int consumer_thread_count = 20;
 
 static void* producer(void *arg) {
-    int index = (int)arg;
+    long index = reinterpret_cast<long>(arg);
     for (int i = 0; i != iterations; ++i) {
         int value = ++producer_count;
         if  (i % 100 == 0) {
-            printf("++%d producer_count %d \n", index, value);
+            printf("++%ld producer_count %d \n", index, value);
         }
         while (!queue.push(value))
             ;
@@ -58,12 +60,12 @@ boost::atomic<bool> done (false);
 
 static void* consumer(void *arg) {
     int value;
-    int index = (int)arg;
+    long index = (long)arg;
     while (!done) {
         while (queue.pop(value)) {
             consumer_count++;
             if (consumer_count % 100 == 0) {
-                printf("--%d consumer_count %d \n", index, (int)consumer_count);
+                printf("--%ld consumer_count %d \n", index, (int)consumer_count);
             }
         }
     }
