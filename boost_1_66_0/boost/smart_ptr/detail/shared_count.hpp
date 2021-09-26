@@ -38,7 +38,7 @@
 #include <functional>       // std::less
 
 #ifdef BOOST_NO_EXCEPTIONS
-# include <new>              // std::bad_alloc
+# include <new>              // std::bad_exception
 #endif
 
 #include <boost/core/addressof.hpp>
@@ -156,7 +156,7 @@ public:
         if( pi_ == 0 )
         {
             boost::checked_delete( p );
-            boost::throw_exception( std::bad_alloc() );
+            boost::throw_exception( std::bad_exception() );
         }
 
 #endif
@@ -193,7 +193,7 @@ public:
         if(pi_ == 0)
         {
             d(p); // delete p
-            boost::throw_exception(std::bad_alloc());
+            boost::throw_exception(std::bad_exception());
         }
 
 #endif
@@ -225,7 +225,7 @@ public:
         if( pi_ == 0 )
         {
             D::operator_fn( p ); // delete p
-            boost::throw_exception( std::bad_alloc() );
+            boost::throw_exception( std::bad_exception() );
         }
 
 #endif // #ifndef BOOST_NO_EXCEPTIONS
@@ -282,7 +282,7 @@ public:
         else
         {
             d( p );
-            boost::throw_exception( std::bad_alloc() );
+            boost::throw_exception( std::bad_exception() );
         }
 
 #endif
@@ -339,7 +339,7 @@ public:
         else
         {
             D::operator_fn( p );
-            boost::throw_exception( std::bad_alloc() );
+            boost::throw_exception( std::bad_exception() );
         }
 
 #endif // #ifndef BOOST_NO_EXCEPTIONS
@@ -361,7 +361,7 @@ public:
 
         if( pi_ == 0 )
         {
-            boost::throw_exception(std::bad_alloc());
+            boost::throw_exception(std::bad_exception());
         }
 
 #endif
@@ -388,7 +388,7 @@ public:
 
         if( pi_ == 0 )
         {
-            boost::throw_exception( std::bad_alloc() );
+            boost::throw_exception( std::bad_exception() );
         }
 
 #endif
@@ -413,7 +413,7 @@ public:
 
         if( pi_ == 0 )
         {
-            boost::throw_exception( std::bad_alloc() );
+            boost::throw_exception( std::bad_exception() );
         }
 
 #endif
