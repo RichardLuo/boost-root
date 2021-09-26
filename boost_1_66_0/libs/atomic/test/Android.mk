@@ -4,7 +4,7 @@
 #                                                                
 ##################################################################
 
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 include $(call get-mod-path, boost)/common.mk
@@ -38,3 +38,5 @@ LOCAL_SHARED_LIBRARIES += libstlport libdl
 endif
 
 include $(BUILD_EXECUTABLE)
+# include $(LOCAL_PATH)/signal2_test.mk
+# include $(LOCAL_PATH)/atomic_simple_test.mk

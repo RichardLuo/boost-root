@@ -40,5 +40,3 @@ LOCAL_SHARED_LIBRARIES += libstlport libdl
 endif
 
 include $(BUILD_EXECUTABLE)
-
-include $(LOCAL_PATH)/atomic_simple_test.mk
